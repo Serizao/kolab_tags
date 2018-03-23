@@ -1,5 +1,5 @@
 {
-    "name": "kolab/tags",
+    "name": "serizao/kolab_tags",
     "type": "roundcube-plugin",
     "description": "Email tags plugin",
     "homepage": "https://git.kolab.org/diffusion/RPK/",
