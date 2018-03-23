@@ -3,8 +3,10 @@
     "type": "roundcube-plugin",
     "description": "Email tags plugin",
     "homepage": "https://git.kolab.org/diffusion/RPK/",
+		"keywords": ["tag","tags","kolab","kolab_tags"],
     "license": "AGPLv3",
     "version": "3.3.4",
+
     "authors": [
         {
             "name": "Aleksander Machniak",
