@@ -1,5 +1,5 @@
 {
-    "name": "kolab/kolab_tags",
+    "name": "kolab/tags",
     "type": "roundcube-plugin",
     "description": "Email tags plugin",
     "homepage": "https://git.kolab.org/diffusion/RPK/",
@@ -10,6 +10,11 @@
             "name": "Aleksander Machniak",
             "email": "machniak@kolabsys.com",
             "role": "Lead"
+        },
+		 {
+            "name": "William Le Berre",
+            "email": "william.leberre@gmail.com",
+            "role": "Developer"
         }
     ],
     "repositories": [
