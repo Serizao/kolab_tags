@@ -332,7 +332,7 @@ private $db_tag2mail = 'tag2mail';
 //error_log(print_r($tag,1));
             foreach ((array) $tag['uids'] as $folder => $_uids) {
                 array_walk($_uids, function(&$uid, $key, $folder) { $uid .= '-' . $folder; }, $folder);
-
+                error_log(print_r($_uids,1));
                 foreach (array_intersect($uids, $_uids) as $uid) {
                     $message_tags[$uid][] = $tag['uid'];
                 }

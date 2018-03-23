@@ -112,7 +112,7 @@ class kolab_tags_backend
           $tag['category']
         );
 
-        return $result ? $tag : false;
+      return $result ? $tag : false;
     }
 
     /**
@@ -125,7 +125,7 @@ class kolab_tags_backend
     public function update($tag)
     {
           //  error_log('ffff');
-    //  error_log(print_r($tag ,1));
+
         // get tag object data, we need _mailbox
         //error_log(print_r($tag['uid'],1));
         $list    = $this->list_tags(array(array('uid', '=', $tag['uid'])));
@@ -133,17 +133,18 @@ class kolab_tags_backend
         $old_tag = $list[0];
 
         if (!$old_tag) {
-            return false;
+          //  return false;
         }
         if(isset($tag['folder']) or isset($tag['uidMessage'])){
         if(!isset($tag['folder']) or empty($tag['folder'])) $tag['folder'] = '';
-        if(isset($tag['uidMessage'][0])) $tag['uidMessage'] =$tag['uidMessage'][0];
+        if(is_array($tag['uidMessage'])) $tag['uidMessage'] = $tag['uidMessage'][0];
         for($i=0;$i<count($tag['uidMessage']);$i++){
-
+          if(is_array($tag['uidMessage'])) $temp = $tag['uidMessage'][$i];
+          else $temp = $tag['uidMessage'];
           $result=$this->rc->db->query(sprintf("INSERT INTO `$this->db_tag2mail`( `id_user`, `uid`, `member`,`folder`) VALUES (?,?,?,?)"),
          $this->rc->user->ID,
          $tag['uid'],
-         $tag['uidMessage'][$i],
+         $temp,
          $tag['folder']
           );
 
@@ -172,17 +173,30 @@ class kolab_tags_backend
      */
     public function remove($uid)
     {
-      if(isset($uid['uid']) and isset($uid['folder']) and isset($uid['member'])){
-    //    error_log(print_r($uid,1));
-        $result = $this->rc->db->query(sprintf("DELETE FROM `$this->db_tag2mail` WHERE `uid`=? and `id_user`=? and member = ? and folder = ?"),
-          $uid['uid'],
-          $this->rc->user->ID,
-          $uid['member'],
-          $uid['folder']
-        );
-          return $result ? $tag : false;
-      } else {
-          return false;
+      if(is_array($uid)){
+        if(isset($uid['uid']) and isset($uid['folder']) and isset($uid['member'])){
+      //    error_log(print_r($uid,1));
+          $result = $this->rc->db->query(sprintf("DELETE FROM `$this->db_tag2mail` WHERE `uid`=? and `id_user`=? and member = ? and folder = ?"),
+            $uid['uid'],
+            $this->rc->user->ID,
+            $uid['member'],
+            $uid['folder']
+          );
+            return $result ? $tag : false;
+        } else {
+            return false;
+        }
+      }else{
+        if(isset($uid) and !empty($uid)){
+      //    error_log(print_r($uid,1));
+          $result = $this->rc->db->query(sprintf("DELETE FROM `$this->db_tags` WHERE `uid`=? and `id_user`=?"),
+            $uid,
+            $this->rc->user->ID
+          );
+            return true;
+        } else {
+            return false;
+        }
       }
     }
 }
