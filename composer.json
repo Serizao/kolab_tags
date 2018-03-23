@@ -6,7 +6,6 @@
 		"keywords": ["tag","tags","kolab","kolab_tags"],
     "license": "AGPLv3",
     "version": "3.3.4",
-
     "authors": [
         {
             "name": "Aleksander Machniak",
