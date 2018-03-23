@@ -1,7 +1,7 @@
 {
     "name": "serizao/kolab_tags",
     "type": "roundcube-plugin",
-    "description": "Email tags plugin",
+    "description": "kolab tags plugin",
     "homepage": "https://git.kolab.org/diffusion/RPK/",
 		"keywords": ["tag","tags","kolab","kolab_tags"],
     "license": "AGPLv3",
